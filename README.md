@@ -10,6 +10,11 @@ API backend desenvolvida com Node.js, TypeScript, Drizzle ORM e PostgreSQL (Supa
 - **Drizzle ORM** - ORM leve e tipo-seguro
 - **PostgreSQL (Supabase)** - Banco de dados
 - **Zod** - Validação de dados
+- **Passport.js** - Autenticação OAuth
+- **JWT** - Tokens de acesso
+- **Nodemailer** - Envio de emails
+- **Helmet** - Segurança HTTP
+- **Express Rate Limit** - Controle de taxa
 - **Vercel** - Hosting
 
 ## 📋 Pré-requisitos
@@ -87,7 +92,14 @@ Para detalhes sobre a configuração do Swagger, consulte:
 - `POST /api/users` - Criar novo usuário
 - `GET /api/users` - Listar todos os usuários
 - `GET /api/users/:id` - Obter usuário específico
-- `DELETE /api/users/:id` - Deletar usuário
+- `DELETE /api/users/:id` - Deletar usuário (autenticado)
+
+### Autenticação
+- `POST /auth/magic-link` - Enviar link mágico por email
+- `GET /auth/magic-link` - Verificar link mágico e autenticar
+- `GET /auth/google` - Iniciar OAuth Google
+- `GET /auth/google/callback` - Callback OAuth Google
+- `POST /auth/logout` - Logout
 
 ## 🏗️ Estrutura do Projeto
 
@@ -193,6 +205,14 @@ Na dashboard do Vercel, adicione as seguintes variáveis:
 | `DATABASE_URL` | URL do banco PostgreSQL | `postgresql://...` |
 | `NODE_ENV` | Ambiente | `production` |
 | `PORT` | Porta (gerenciada pela Vercel) | - |
+| `JWT_SECRET` | Segredo para JWT | `your_jwt_secret` |
+| `GOOGLE_CLIENT_ID` | Client ID Google OAuth | `your_google_client_id` |
+| `GOOGLE_CLIENT_SECRET` | Client Secret Google OAuth | `your_google_client_secret` |
+| `EMAIL_HOST` | SMTP Host | `smtp.gmail.com` |
+| `EMAIL_PORT` | SMTP Port | `587` |
+| `EMAIL_USER` | SMTP User | `your_email@gmail.com` |
+| `EMAIL_PASS` | SMTP Password | `your_email_password` |
+| `FRONTEND_URL` | URL do frontend | `https://your-frontend.com` |
 
 ## 📝 Boas Práticas Implementadas
 
@@ -230,3 +250,4 @@ Para dúvidas ou issues, abra um issue no repositório.
 ## 📄 Licença
 
 ISC
+

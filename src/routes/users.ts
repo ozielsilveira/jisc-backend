@@ -1,6 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { Request, Response, Router } from 'express';
 import { z } from 'zod';
+import { authenticateToken } from '../middleware/auth.js';
 import { db } from '../db/index.js';
 import { usersTable } from '../db/schema.js';
 import { createJsonResponse, validateRequest } from '../utils/response.js';
@@ -64,7 +65,7 @@ router.get('/api/users/:id', async (req: Request, res: Response) => {
     }
 });
 
-router.delete('/api/users/:id', async (req: Request, res: Response) => {
+router.delete('/api/users/:id', authenticateToken, async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const result = await db.delete(usersTable).where(eq(usersTable.id, id)).returning();
