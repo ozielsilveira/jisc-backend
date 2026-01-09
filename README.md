@@ -61,26 +61,26 @@ npm run dev
 
 O servidor estará disponível em `http://localhost:3000`
 
-## 📖 Documentação Swagger/OpenAPI
+## 🧪 Testando a API
 
-A API possui documentação interativa através do Swagger UI:
+Para testar os endpoints, você pode usar ferramentas como:
 
+- **Postman** ou **Insomnia** - Importe as rotas abaixo
+- **cURL** - Exemplos de comandos no terminal
+
+### Verificar se servidor está rodando
+```bash
+curl http://localhost:3000/health
 ```
-http://localhost:3000/swagger
+
+### Resposta esperada
+```json
+{
+  "success": true,
+  "message": "Server is running",
+  "timestamp": "2024-01-08T10:30:00.000Z"
+}
 ```
-
-### Recursos
-- **Try it out** - Teste endpoints diretamente na interface
-- **Schemas** - Explore modelos de dados
-- **Exemplos** - Veja exemplos de requisição/resposta
-- **Download** - Exporte especificação OpenAPI
-
-### Documentação de Implementação
-Para detalhes sobre a configuração do Swagger, consulte:
-- `SWAGGER_QUICK_START.md` - Guia rápido
-- `SWAGGER_SETUP.md` - Setup completo
-- `SWAGGER_EXAMPLES.md` - Exemplos para novos endpoints
-- `SWAGGER_ESTRUTURA.md` - Diagrama da estrutura
 
 ## 📚 Rotas Disponíveis
 
