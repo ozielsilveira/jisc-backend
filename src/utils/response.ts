@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ApiResponse } from '../types/api';
+import { ApiResponse } from '../types/api.js';
 
 export const createJsonResponse = <T>(
     success: boolean,

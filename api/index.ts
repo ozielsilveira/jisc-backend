@@ -1,7 +1,16 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import app from '../src/index';
 
-export default (req: VercelRequest, res: VercelResponse) => {
+let appPromise: Promise<any> | null = null;
+
+async function getApp() {
+    if (!appPromise) {
+        const importPath = process.env.NODE_ENV === 'production' ? '../dist/index.js' : '../src/index';
+        appPromise = import(/* @vite-ignore */ importPath).then((m) => m.default ?? m);
+    }
+    return appPromise;
+}
+
+export default async (req: VercelRequest, res: VercelResponse) => {
     // Ensure cors headers are set
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,6 +25,7 @@ export default (req: VercelRequest, res: VercelResponse) => {
         return;
     }
 
+    const app = await getApp();
     return app(req, res);
 };
 
