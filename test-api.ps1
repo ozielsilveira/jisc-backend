@@ -23,13 +23,13 @@ Write-Host ""
 # Criar usuário
 Write-Host "3️⃣ Criar Usuário" -ForegroundColor Yellow
 $body = @{
-    name = "João Silva"
+    name  = "João Silva"
     email = "joao@example.com"
 } | ConvertTo-Json
 
 $response = Invoke-WebRequest -Uri "$BASE_URL/api/users" `
     -Method Post `
-    -Headers @{"Content-Type" = "application/json"} `
+    -Headers @{"Content-Type" = "application/json" } `
     -Body $body
 
 $userResponse = $response.Content | ConvertFrom-Json
@@ -53,7 +53,8 @@ Write-Host "5️⃣ Obter Usuário Específico" -ForegroundColor Yellow
 if ($USER_ID -and $USER_ID -ne "null") {
     $response = Invoke-WebRequest -Uri "$BASE_URL/api/users/$USER_ID" -Method Get
     $response.Content | ConvertFrom-Json | ConvertTo-Json
-} else {
+}
+else {
     Write-Host "Erro: ID de usuário não obtido" -ForegroundColor Red
 }
 Write-Host ""
@@ -64,7 +65,8 @@ Write-Host "6️⃣ Deletar Usuário" -ForegroundColor Yellow
 if ($USER_ID -and $USER_ID -ne "null") {
     $response = Invoke-WebRequest -Uri "$BASE_URL/api/users/$USER_ID" -Method Delete
     $response.Content | ConvertFrom-Json | ConvertTo-Json
-} else {
+}
+else {
     Write-Host "Erro: ID de usuário não obtido" -ForegroundColor Red
 }
 Write-Host ""

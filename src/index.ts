@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
 import { config } from '@/config';
-import { requestLogger } from '@/middleware/requestLogger';
 import { errorHandler, notFoundHandler } from '@/middleware/errorHandler';
+import { requestLogger } from '@/middleware/requestLogger';
 import healthRoutes from '@/routes/health';
 import userRoutes from '@/routes/users';
+import cors from 'cors';
+import express from 'express';
 
 const app = express();
 
@@ -26,19 +26,19 @@ app.use(errorHandler);
 
 // Start server only in development
 if (process.env.NODE_ENV !== 'production') {
-  const server = app.listen(config.port, () => {
-    console.log(`🚀 Server running on http://localhost:${config.port}`);
-    console.log(`📝 Environment: ${config.env}`);
-  });
-
-  // Graceful shutdown
-  process.on('SIGTERM', () => {
-    console.log('SIGTERM received, shutting down gracefully');
-    server.close(() => {
-      console.log('Server closed');
-      process.exit(0);
+    const server = app.listen(config.port, () => {
+        console.log(`🚀 Server running on http://localhost:${config.port}`);
+        console.log(`📝 Environment: ${config.env}`);
     });
-  });
+
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+        console.log('SIGTERM received, shutting down gracefully');
+        server.close(() => {
+            console.log('Server closed');
+            process.exit(0);
+        });
+    });
 }
 
 export default app;
