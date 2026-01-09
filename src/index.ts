@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import helmet from 'helmet';
+import * as helmetModule from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import session from 'express-session';
 import passport from 'passport';
@@ -14,6 +14,7 @@ import userRoutes from './routes/users.js';
 const app = express();
 
 // Security middleware
+const helmet = helmetModule.default || helmetModule;
 app.use(helmet());
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
