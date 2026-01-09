@@ -1,6 +1,6 @@
 import cors from 'cors';
-import express from 'express';
-import { default as helmet } from 'helmet';
+import express, { type Express } from 'express';
+import helmetPkg from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import session from 'express-session';
 import passport from 'passport';
@@ -11,10 +11,11 @@ import authRoutes from './routes/auth.js';
 import healthRoutes from './routes/health.js';
 import userRoutes from './routes/users.js';
 
-const app = express();
+const app: Express = express();
 
 // Security middleware
-app.use(helmet());
+// @ts-ignore - helmet v8 ESM compatibility issue
+app.use(helmetPkg());
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100, // limit each IP to 100 requests per windowMs
