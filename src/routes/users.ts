@@ -1,9 +1,9 @@
-import { db } from '@/db';
-import { usersTable } from '@/db/schema';
-import { createJsonResponse, validateRequest } from '@/utils/response';
 import { eq } from 'drizzle-orm';
 import { Request, Response, Router } from 'express';
 import { z } from 'zod';
+import { db } from '../db';
+import { usersTable } from '../db/schema';
+import { createJsonResponse, validateRequest } from '../utils/response';
 
 const router = Router();
 

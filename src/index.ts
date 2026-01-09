@@ -1,10 +1,10 @@
-import { config } from '@/config';
-import { errorHandler, notFoundHandler } from '@/middleware/errorHandler';
-import { requestLogger } from '@/middleware/requestLogger';
-import healthRoutes from '@/routes/health';
-import userRoutes from '@/routes/users';
 import cors from 'cors';
 import express from 'express';
+import { config } from './config';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { requestLogger } from './middleware/requestLogger';
+import healthRoutes from './routes/health';
+import userRoutes from './routes/users';
 
 const app = express();
 

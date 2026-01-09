@@ -1,5 +1,5 @@
-import { ApiResponse } from '@/types/api';
 import { z } from 'zod';
+import { ApiResponse } from '../types/api';
 
 export const createJsonResponse = <T>(
     success: boolean,

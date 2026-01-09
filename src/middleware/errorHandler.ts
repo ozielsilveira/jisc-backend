@@ -1,5 +1,5 @@
-import { config } from '@/config';
 import { NextFunction, Request, Response } from 'express';
+import { config } from '../config';
 
 export const errorHandler = (
     err: any,

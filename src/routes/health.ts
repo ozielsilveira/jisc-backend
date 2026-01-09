@@ -1,5 +1,5 @@
-import { createJsonResponse } from '@/utils/response';
 import { Request, Response, Router } from 'express';
+import { createJsonResponse } from '../utils/response';
 
 const router = Router();
 
