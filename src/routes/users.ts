@@ -14,8 +14,68 @@ const createUserSchema = z.object({
 });
 
 /**
- * POST /api/users
- * Create a new user
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Create a new user
+ *     description: Creates a new user with the provided name and email
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateUserRequest'
+ *           examples:
+ *             example1:
+ *               value:
+ *                 name: "John Doe"
+ *                 email: "john@example.com"
+ *     responses:
+ *       '201':
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - success
+ *                 - message
+ *                 - data
+ *                 - timestamp
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User created successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '400':
+ *         description: Invalid request data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: Failed to create user
+ *                 error:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '500':
+ *         description: Internal server error
  */
 router.post('/api/users', async (req: Request, res: Response) => {
     try {
@@ -40,8 +100,41 @@ router.post('/api/users', async (req: Request, res: Response) => {
 });
 
 /**
- * GET /api/users
- * Get all users
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users
+ *     description: Retrieves a list of all users in the system
+ *     tags:
+ *       - Users
+ *     responses:
+ *       '200':
+ *         description: Users fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - success
+ *                 - message
+ *                 - data
+ *                 - timestamp
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Users fetched successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/User'
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '500':
+ *         description: Internal server error
  */
 router.get('/api/users', async (req: Request, res: Response) => {
     try {
@@ -55,8 +148,63 @@ router.get('/api/users', async (req: Request, res: Response) => {
 });
 
 /**
- * GET /api/users/:id
- * Get a specific user
+ * @swagger
+ * /api/users/{id}:
+ *   get:
+ *     summary: Get a specific user
+ *     description: Retrieves a user by their UUID identifier
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: User UUID
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *       '200':
+ *         description: User fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - success
+ *                 - message
+ *                 - data
+ *                 - timestamp
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User fetched successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '404':
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: User not found
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '500':
+ *         description: Internal server error
  */
 router.get('/api/users/:id', async (req: Request, res: Response) => {
     try {
@@ -77,8 +225,63 @@ router.get('/api/users/:id', async (req: Request, res: Response) => {
 });
 
 /**
- * DELETE /api/users/:id
- * Delete a user
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary: Delete a user
+ *     description: Deletes a user from the system by their UUID identifier
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: User UUID
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *       '200':
+ *         description: User deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - success
+ *                 - message
+ *                 - data
+ *                 - timestamp
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User deleted successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '404':
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: User not found
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       '500':
+ *         description: Internal server error
  */
 router.delete('/api/users/:id', async (req: Request, res: Response) => {
     try {

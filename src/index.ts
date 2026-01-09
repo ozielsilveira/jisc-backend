@@ -1,10 +1,12 @@
 import cors from 'cors';
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import { config } from './config';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { requestLogger } from './middleware/requestLogger';
 import healthRoutes from './routes/health';
 import userRoutes from './routes/users';
+import { specs } from './swagger/swagger';
 
 const app = express();
 
@@ -13,6 +15,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
+
+// Swagger documentation
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs, {
+    swaggerOptions: {
+        docExpansion: 'list',
+        tagsSorter: 'alpha',
+        operationsSorter: 'method',
+    },
+    customCss: '.swagger-ui .topbar { display: none }',
+}));
 
 // Routes
 app.use(healthRoutes);
