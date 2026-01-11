@@ -7,6 +7,7 @@ import passport from 'passport';
 import { config } from './config/index.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { requestLogger } from './middleware/requestLogger.js';
+import athletesRoutes from './routes/athletes.js';
 import authRoutes from './routes/auth.js';
 import healthRoutes from './routes/health.js';
 import userRoutes from './routes/users.js';
@@ -37,6 +38,7 @@ app.use(requestLogger);
 
 // Routes
 app.use(healthRoutes);
+app.use(athletesRoutes);
 app.use(userRoutes);
 app.use(authRoutes);
 

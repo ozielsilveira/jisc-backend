@@ -13,5 +13,18 @@ export const usersTable = pgTable('users', {
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 });
 
+export const athletesTable = pgTable('athletes', {
+    id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+    userId: uuid('user_id').references(() => usersTable.id).notNull(),
+    fullName: text('full_name').notNull(),
+    dateOfBirth: timestamp('date_of_birth', { withTimezone: true }).notNull(),
+    cpf: text('cpf').notNull(),
+    phone: text('phone').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+});
+
 export type User = typeof usersTable.$inferSelect;
 export type NewUser = typeof usersTable.$inferInsert;
+export type Athlete = typeof athletesTable.$inferSelect;
+export type NewAthlete = typeof athletesTable.$inferInsert;
